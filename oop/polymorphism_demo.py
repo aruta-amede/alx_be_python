@@ -40,3 +40,4 @@ class Library:
     def list_books(self):
         for book in self.books:
             print(book)  # __str__ will be automatically used
+
