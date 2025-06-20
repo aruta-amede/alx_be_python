@@ -1,43 +1,23 @@
-# library_system.py
+# polymorphism_demo.py
 
-class Book:
-    def __init__(self, title: str, author: str):
-        self.title = title
-        self.author = author
+import math  # ✅ Needed for Circle area calculation
 
-    def __str__(self):
-        return f"Book: {self.title} by {self.author}"
+class Shape:
+    def area(self):
+        raise NotImplementedError("Subclasses must override the area() method")
 
+class Rectangle(Shape):
+    def __init__(self, length, width):  # ✅ Constructor check
+        self.length = length
+        self.width = width
 
-class EBook(Book):
-    def __init__(self, title: str, author: str, file_size: int):
-        super().__init__(title, author)
-        self.file_size = file_size
+    def area(self):  # ✅ Method check
+        return self.length * self.width
 
-    def __str__(self):
-        return f"EBook: {self.title} by {self.author}, File Size: {self.file_size}KB"
+class Circle(Shape):
+    def __init__(self, radius):  # ✅ Constructor check
+        self.radius = radius
 
-
-class PrintBook(Book):
-    def __init__(self, title: str, author: str, page_count: int):
-        super().__init__(title, author)
-        self.page_count = page_count
-
-    def __str__(self):
-        return f"PrintBook: {self.title} by {self.author}, Page Count: {self.page_count}"
-
-
-class Library:
-    def __init__(self):
-        self.books = []
-
-    def add_book(self, book):
-        if isinstance(book, Book):
-            self.books.append(book)
-        else:
-            raise TypeError("Only instances of Book or its subclasses can be added")
-
-    def list_books(self):
-        for book in self.books:
-            print(book)  # __str__ will be automatically used
+    def area(self):  # ✅ Method check
+        return math.pi * (self.radius ** 2)
 
